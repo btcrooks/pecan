@@ -1,0 +1,26 @@
+{
+  "name": "pecan",
+  "version": "1.0.0",
+  "description": "Create a new PyProcessing CLI project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/btcrooks/pecan.git"
+  },
+  "keywords": [
+    "processing",
+    "python",
+    "pyprocessing",
+    "wizard",
+    "init"
+  ],
+  "author": "Brandon Crooks",
+  "license": "AL",
+  "bugs": {
+    "url": "https://github.com/btcrooks/pecan/issues"
+  },
+  "homepage": "https://github.com/btcrooks/pecan"
+}
