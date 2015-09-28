@@ -2,7 +2,7 @@
   "name": "pecan",
   "version": "1.0.0",
   "description": "Create a new PyProcessing CLI project",
-  "main": "app.js",
+  "main": "pecan.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,5 +22,9 @@
   "bugs": {
     "url": "https://github.com/btcrooks/pecan/issues"
   },
-  "homepage": "https://github.com/btcrooks/pecan"
+  "homepage": "https://github.com/btcrooks/pecan",
+  "devDependencies": {
+    "cli": "^0.10.0",
+    "prompt": "^0.2.14"
+  }
 }
