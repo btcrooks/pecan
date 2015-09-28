@@ -15,6 +15,7 @@ pecanApp
   .action(function(){
     console.log('Creating new project');
     // PyProcessing Repo
+
   }).on('--help', function() {
     console.log(' Run to create new projects... its simple.');
   });
