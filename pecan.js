@@ -3,19 +3,15 @@
 var fs        = require('fs'),
     url       = require('url'),
     http      = require('http'),
+    prompt    = require('prompt'),
     pecanApp  = require('commander'),
     pecanInfo = require('./package.json');
 
-pecanApp.version(pecanInfo.version);
-
 pecanApp
+  .version(pecanInfo.version)
   .command('init', 'Create new PyProcessing project')
-  .alias('i')
   .action(function(){
-    console.log('Creating new project');
-    // Download PyProcessing Repo
-  }).on('--help', function() {
-    console.log(' Run to create new projects... its simple.');
+    console.log('Creating new PyProcessing project');
   });
 
 pecanApp.parse(process.argv);
