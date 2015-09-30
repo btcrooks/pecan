@@ -7,10 +7,13 @@ var fs        = require('fs'),
     pecanApp  = require('commander'),
     pecanInfo = require('./package.json');
 
+// Setup Project
 pecanApp
   .version(pecanInfo.version)
-  .command('init', 'Create new PyProcessing project')
-  .action(function(){
-    console.log('Creating new PyProcessing project');
-  })
-  .parse(process.argv);
+  .command('init', 'Create new PyProcessing project');
+
+// Run Project
+pecanApp
+  .command('run', 'Run Pyprocessing file');
+
+pecanApp.parse(process.argv);
