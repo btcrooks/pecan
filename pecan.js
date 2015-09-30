@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 
 var fs        = require('fs'),
-    url       = require('url'),
-    http      = require('http'),
     prompt    = require('prompt'),
     pecanApp  = require('commander'),
     pecanInfo = require('./package.json');
