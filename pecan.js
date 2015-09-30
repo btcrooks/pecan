@@ -12,6 +12,5 @@ pecanApp
   .command('init', 'Create new PyProcessing project')
   .action(function(){
     console.log('Creating new PyProcessing project');
-  });
-
-pecanApp.parse(process.argv);
+  })
+  .parse(process.argv);
