@@ -2,16 +2,24 @@
 
 var fs        = require('fs'),
     sys       = require('sys'),
-    exec      = require('child_process').exec,
+    execSync  = require('exec-sync2'),
     pecanApp  = require('commander'),
     pecanInfo = require('./package.json');
 
 pecanApp
   .parse(process.argv);
 
-console.log('Running PyProcessing app.');
-
 function puts(error, stdout, stderr) {
   console.log(stdout);
 }
-exec('bash ./run.pecan', puts);
+
+// Check it project already exists
+if (!fs.existsSync('./run.pecan')) {
+  console.log('Pecan project doesn\'t exist!');
+  console.log('Run `$ pecan init` to get started');
+  process.exit(1);
+} else {
+  console.log('Running PyProcessing app.');
+
+  execSync('bash ./run.pecan', puts);
+}
