@@ -7,7 +7,7 @@ var fs = require('fs'),
     pecanInfo = require('./package.json');
 
 
-pecanApp.version(pecanInfo.version)
+pecanApp.version(pecanInfo.version);
 
 pecanApp
   .command('init', 'Create new PyProcessing project')
