@@ -2,15 +2,30 @@
 
 var fs        = require('fs'),
     sys       = require('sys'),
-    execSync  = require('exec-sync2'),
+    exec      = require('child_process').exec,
+    shell     = require('shelljs');
     pecanApp  = require('commander'),
     pecanInfo = require('./package.json');
 
 pecanApp
   .parse(process.argv);
 
-function puts(error, stdout, stderr) {
-  console.log(stdout);
+function execSync(command) {
+  // Runn command in a subshell
+  exec(command + ' 2>&1 1>output && echo done! > done');
+
+  // Block the event loop untill the command has executed
+  while (!fs.existsSync('done')) {
+    // do nothing
+  }
+  // Read the output
+  var output = fs.readFileSync('output');
+
+  // Delete temporary files.
+  fs.unlinkSync('output');
+  fs.unlinkSync('done');
+
+  return output;
 }
 
 // Check it project already exists
@@ -20,6 +35,5 @@ if (!fs.existsSync('./run.pecan')) {
   process.exit(1);
 } else {
   console.log('Running PyProcessing app.');
-
-  execSync('bash ./run.pecan', puts);
+  execSync('bash ./processing.py-master/processing-py.sh ./main.py');
 }
