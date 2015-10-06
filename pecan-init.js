@@ -3,13 +3,16 @@
 var fs        = require('fs'),
     url       = require('url'),
     http      = require('http'),
+    shjs      = require('shelljs'),
     prompt    = require('prompt'),
     download  = require('download'),
-    pecanApp  = require('commander'),
-    pecanInfo = require('./package.json');
+    pecanApp  = require('commander');
 
-var pypRepo = 'https://github.com/jdf/processing.py/archive/master.zip',
-    dir = './processing.py-master';
+// PyProcessing Repo and destination
+var pypRepo       = 'https://github.com/jdf/processing.py/archive/master.zip',
+    pecanLib      = process.env.HOME + '/.pecan',
+    pypFolder     = '/processing.py-master',
+    pecanConfig   = './config.pecan';
 
 pecanApp
   .parse(process.argv);
@@ -17,21 +20,29 @@ pecanApp
 var setupPecanProject = function () {
   console.log('Let\'s get some details.');
 
-  // Setup `run.sh` file
-  // get app entry point
-  prompt.message   = "";
-  prompt.delimiter = "";
+  // Setup config file
+  prompt.message   = '';
+  prompt.delimiter = '';
   prompt.start();
   var appInfo = {
     properties: {
+      projectName: {
+        message: 'Project Name:',
+        required: false
+      },
       projectEntrypoint: {
-        message: 'Application Entrypoint: ',
+        message: 'Project Entrypoint:',
         pattern: /\w*.py$/,
         default: 'main.py',
-        required: true
+        required: true,
+        description: 'Define the projects entry point. (This would be your .pde in s sketch project.). This allows PyProcessing.'
+      },
+      author: {
+        message: 'Author:',
+        required: false
       },
       contributors: {
-        message: 'Contributor(s): ',
+        message: 'Contributor(s):',
         required: false
       }
     }
@@ -39,26 +50,34 @@ var setupPecanProject = function () {
 
   prompt.get(appInfo, function (err, result){
     // Creat Pecan run file
-    // result.projectEntrypoint
-    // result.contributors
+    console.log('');
+    console.log('Your Pecan project has been created!');
+    console.log(JSON.stringify(result, null, 2));
+
+    var wstream = fs.createWriteStream(pecanConfig);
+    wstream.write(JSON.stringify(result, null, 2));
+    wstream.end(function () { console.log(pecanConfig, 'file saved.'); });
   });
 };
 
-// Check it project already exists
-if (fs.existsSync('./run.pecan')) {
+// Check if project already exists
+if (fs.existsSync(pecanConfig)) {
   console.log('Pecan project already exists!');
   process.exit(1);
 } else {
   // Begin Setup
-  console.log('Lets get your directory setup.');
-  console.log('Downloading PyProcessing lib');
+  console.log('Lets get your Project setup.');
+  console.log('Cecking if PyProcessing lib is installed');
 
   // Check if PyProcessing libs are already installed
-  if (!fs.existsSync(dir)){
+  if (!fs.existsSync(pecanLib + pypFolder)){
+    // Lib not installed
+    // Create directory
+    shjs.mkdir('-p', pecanLib + pypFolder);
     // Download PyProcessing Repo
     new download({mode: '755', extract: true})
       .get(pypRepo)
-      .dest('./')
+      .dest(pecanLib + pypFolder)
       .run(function (err, files) {
         console.log('Downloaded sucessfull: ' + files);
         setupPecanProject();
