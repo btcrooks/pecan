@@ -35,7 +35,7 @@ var setupPecanProject = function () {
         pattern: /\w*.py$/,
         default: 'main.py',
         required: true,
-        description: 'Define the projects entry point. (This would be your .pde in s sketch project.). This allows PyProcessing.'
+        description: 'Define your projects entry point. (This would be your .pde file in a standard sketch project).'
       },
       author: {
         message: 'Author:',
