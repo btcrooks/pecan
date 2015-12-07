@@ -12,8 +12,9 @@ pecanApp
 
 // Run Project
 pecanApp
-  .command('run', 'Run Pyprocessing file');
+  .command('run', 'Run PyProcessing file');
 
+// TODO:
 // Update PyProcessing Lib
 // Update Pecan
 
