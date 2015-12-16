@@ -23,7 +23,7 @@ if (!fs.existsSync(pecanConfig)) {
   console.log('Running PyProcessing app.');
   //
   // Hack... need to change this.
-  //-----------------------------
+  //
   var child = shjs.exec('bash ' + pecanLib + pypFolder + '/processing-py.sh main.py');
   shjs.exit(0);
 }
