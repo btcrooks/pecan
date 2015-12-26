@@ -7,3 +7,4 @@ Pecan helps create PyProcessing documents inside the command line.
 ### Roadmap
 - [ ] vim wrapper
 - [ ] Launch PyProcess docs with `-docs`
+- [ ] Save projects to sketch project
