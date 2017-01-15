@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 
-var fs        = require('fs'),
-    url       = require('url'),
-    http      = require('http'),
-    shjs      = require('shelljs'),
-    prompt    = require('prompt'),
-    download  = require('download'),
-    pecanApp  = require('commander');
+var fs       = require('fs'),
+    url      = require('url'),
+    http     = require('http'),
+    shjs     = require('shelljs'),
+    prompt   = require('prompt'),
+    download = require('download'),
+    pecanApp = require('commander'),
 
-// PyProcessing Repo and destination
-var pypRepo       = 'https://github.com/jdf/processing.py/archive/master.zip',
-    pecanLib      = process.env.HOME + '/.pecan',
-    pypFolder     = '/processing.py-master',
-    pecanConfig   = './config.pecan';
+    // PyProcessig Repo and destination
+    pypRepo      = 'https://github.com/jdf/processing.py/archive/master.zip',
+    pecanLib     = process.env.HOME + '/.pecan',
+    pypFolder    = '/processing.py-master',
+    pecanConfig  = './config.pecan';
 
 pecanApp
   .parse(process.argv);
@@ -26,16 +26,16 @@ var setupPecanProject = function () {
   prompt.start();
   var appInfo = {
     properties: {
-      projectName: {
+      name: {
         message: 'Project Name:',
         required: false
       },
-      projectEntrypoint: {
-        message: 'Project Entrypoint:',
+      main: {
+        message: 'Entrypoint:',
         pattern: /\w*.py$/,
         default: 'main.py',
         required: true,
-        description: 'Define your projects entry point. (This would be your .pde file in a standard sketch project).'
+        description: 'Your projects entry point. (This would be your .pde file in a standard sketch project).'
       },
       author: {
         message: 'Author:',
@@ -49,7 +49,7 @@ var setupPecanProject = function () {
   };
 
   prompt.get(appInfo, function (err, result){
-    // Creat Pecan run file
+    // Create Pecan run file
     console.log('');
     console.log('Your Pecan project has been created!');
     console.log(JSON.stringify(result, null, 2));
