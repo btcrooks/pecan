@@ -8,14 +8,18 @@ var fs        = require('fs'),
 // Setup Project
 pecanApp
   .version(pecanInfo.version)
-  .command('init', 'Create new PyProcessing project');
+  .command('init', 'Create new PyProcessing project')
 
-// Run Project
-pecanApp
-  .command('run', 'Run PyProcessing file');
+  // Run Project
+  .command('run', 'Run PyProcessing file')
 
-// TODO:
-// Update PyProcessing Lib
-// Update Pecan
+  // View PyProcessing Docs
+  .command('docs', 'View PyProcessing docs');
+
+/**
+* TODO:
+*  - Update PyProcessing Lib
+*  - Update Pecan
+*/
 
 pecanApp.parse(process.argv);
